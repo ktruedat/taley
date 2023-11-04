@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Creează</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        <link rel="icon" href="images/tale.png" type="image/x-icon">
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>Creează</h1>
+						<p>Povestea ta poate face ziua cuiva mai bună</p>
+					</header>
+ 
+					<section>
+						<h2>Povestea ta</h2>
+						<form method="post" action="#" id="tale-form">
+							<div class="row gtr-uniform">
+								<div class="col-6 col-12-xsmall">
+									<input type="email" name="email" id="demo-email" value="" placeholder="Email" />
+								</div>
+								<div class="col-6 col-12-xsmall">
+									<input type="password" name="password" id="demo-pass" value="" placeholder="Parola" />
+								</div>
+								<div class="col-12">
+									<select name="category" id="demo-category">
+										<option value="">- Categorie -</option>
+										<option value=1>Romantice</option>
+										<option value=2>Triste</option>
+										<option value=3>Haioase</option>
+										<option value=4>Cu învățături</option>
+									</select>
+								</div>
+								<div class="col-6 col-12-xsmall">
+									<input type="text" name="title" id="demo-title" value="" placeholder="Titlul" />
+								</div>
+								<div class="col-12">
+									<textarea name="message" id="demo-message" placeholder="Introdu mesajul tău" rows="6"></textarea>
+								</div>
+								<div class="col-12">
+									<ul class="actions">
+										<li><input type="submit" value="Trimite" class="primary" /></li>
+										<li><input type="reset" value="Resetează" /></li>
+										<li><a href="index.html" class="active">Pagina principală</a></li>
+									</ul>
+								</div>
+							</div>
+						</form>
+					</section>
+					
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Taley.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<script>
+				document.getElementById("tale-form").addEventListener("submit", function(event) {
+					event.preventDefault(); 
+			
+					const email = document.getElementById("demo-email").value;
+					const password = document.getElementById("demo-pass").value;
+					const category = document.getElementById("demo-category").value;
+					const message = document.getElementById("demo-message").value;
+					const title = document.getElementById("demo-title").value;
+
+					const categoryUint = parseInt(category, 10); 
+
+					const taleData = {
+						email: email,
+						password: password,
+						category: categoryUint,
+						contents: message,
+						title: title
+					};
+			
+					fetch('http://localhost:1337/tale', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(taleData),
+					})
+					.then(response => response.json())
+					.then(data => {
+						console.log(data);
+					})
+					.catch(error => {
+						console.error(error);
+					});
+				});
+			</script>
+			
+
+	</body>
+</html>

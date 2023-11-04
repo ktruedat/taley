@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Taley</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        <link rel="icon" href="images/tale.png" type="image/x-icon">
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<span class="logo"><img src="images/tale.png" alt="" /></span>
+						<h1>Taley</h1>
+						<p>Creează povestea<br />
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html" class="active">Pagina principală</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>Poveștile utilizatorilor</h2>
+										</header>
+									</div>
+									<span class="image"><img src="images/fairy-tale.png" alt="" /></span>
+								</div>
+							</section>
+
+						<!-- First Section -->
+						<section id="first" class="main special">
+							<h2>Poveștile utilizatorilor</h2>
+							<div id="user-tales">
+								<!-- Tale items will be dynamically added here -->
+							</div>
+						</section>
+						
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Taley </p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<script>
+				// Function to fetch and display user tales
+				function displayUserTales() {
+					fetch('http://localhost:1337/tale/all', {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+					})
+					.then(response => response.json())
+					.then(data => {
+						// Handle the response from the server here
+						const userTalesContainer = document.getElementById('user-tales');
+						userTalesContainer.innerHTML = ''; // Clear any existing content
+
+						// Populate the container with user tales
+						data.tales.forEach(tale => {
+							// Create a div for each user tale
+							const taleDiv = document.createElement('div');
+							taleDiv.classList.add('user-tale');
+
+							// Add the title as a heading
+							const titleHeading = document.createElement('h3');
+							titleHeading.textContent = tale.title;
+							taleDiv.appendChild(titleHeading);
+
+							// Add the content
+							const contentParagraph = document.createElement('p');
+							contentParagraph.textContent = tale.contents;
+							taleDiv.appendChild(contentParagraph);
+
+							// Append the user tale div to the container
+							userTalesContainer.appendChild(taleDiv);
+						});
+					})
+					.catch(error => {
+						// Handle errors here
+						console.error(error);
+					});
+				}
+
+				// Call the function to display user tales when the page loads
+				displayUserTales();
+
+			</script>
+			
+            
+
+	</body>
+</html>

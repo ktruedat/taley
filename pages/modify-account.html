@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Taley</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        <link rel="icon" href="images/tale.png" type="image/x-icon">
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>Modifică</h1>
+						<p>Modifică sau șterge contul tău</p>
+					</header>
+ 
+                    <section>
+                        <h2>Informații</h2>
+                        <form method="post" action="#" id="user-form">
+                            <div class="row gtr-uniform">
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="email" name="email" id="demo-email" value="" placeholder="Email" />
+                                </div>
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="password" name="currentPassword" id="demo-pass" value="" placeholder="Parola actuală" />
+                                </div>
+                                <div class="col-12">
+                                    <input type="password" name="newPassword" id="newPass" value="" placeholder="Parola nouă" />
+                                </div>
+                                <div class="col-12">
+                                    <ul class="actions">
+                                        <li><input type="submit" value="Modifică" class="primary" /></li>
+                                        <li><input type="reset" value="Șterge contul" /></li>
+                                        <li><a href="index.html" class="active">Pagina principală</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                    
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Taley.</p>
+					</footer>
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            <script>
+                document.getElementById("user-form").addEventListener("submit", function(event) {
+                    event.preventDefault(); // Prevent the default form submission.
+            
+                    // Get form data
+                    const email = document.getElementById("demo-email").value;
+                    const currentPassword = document.getElementById("demo-pass").value;
+                    const newPassword = document.getElementById("newPass").value;
+            
+                    // Create a data object
+                    const userData = {
+                        email: email,
+                        currentPassword: currentPassword,
+                        newPassword: newPassword
+                    };
+            
+                    // Make an AJAX POST request to the Golang server
+                    fetch('http://localhost:1337/user/update', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(userData),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response from the server here
+                        console.log(data);
+                    })
+                    .catch(error => {
+                        // Handle errors here
+                        console.error(error);
+                    });
+                });
+            </script>
+
+            <script>
+                document.getElementById("user-form").addEventListener("reset", function(event) {
+                    event.preventDefault(); // Prevent the default form submission.
+
+                    // Get form data
+                    const email = document.getElementById("demo-email").value;
+                    const currentPassword = document.getElementById("demo-pass").value;
+
+                    // Create a data object
+                    const userData = {
+                        email: email,
+                        currentPassword: currentPassword,
+                    };
+
+                    // Make an AJAX POST request to the Golang server
+                    fetch('http://localhost:1337/user', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(userData),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response from the server here
+                        console.log(data);
+                    })
+                    .catch(error => {
+                        // Handle errors here
+                        console.error(error);
+                    });
+                });
+            </script>
+            
+
+	</body>
+</html>
