@@ -18,11 +18,32 @@ func NewOriginalController(db *gorm.DB) *OriginalController {
 func (ctrl *OriginalController) GetReferences(c *gin.Context) {
 	references := &model.References{}
 	if err := ctrl.db.Debug().
+		Preload("Country").
+		Preload("Region").
+		Preload("TimeOfTheDay").
+		Preload("Weather").
 		First(&references).Error; err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"err": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"references": references})
+	//type data struct {
+	//	Country      string `json:"country"`
+	//	Region       string `json:"region"`
+	//	TimeOfTheDay string `json:"timeOfTheDay"`
+	//	Weather      string `json:"weather"`
+	//}
+	//d := data{
+	//	Country:      references.Country.Name,
+	//	Region:       references.Region.Name,
+	//	TimeOfTheDay: references.TimeOfTheDay.Name,
+	//	Weather:      references.Weather.Name,
+	//}
+	c.JSON(http.StatusOK, gin.H{
+		"country":      references.Country.Name,
+		"region":       references.Region.Name,
+		"timeOfTheDay": references.TimeOfTheDay.Name,
+		"weather":      references.Weather.Name,
+	})
 }
 
 func (ctrl *OriginalController) PostReferences(c *gin.Context) {

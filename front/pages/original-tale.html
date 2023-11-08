@@ -4,9 +4,9 @@
 		<title>Taley</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-        <link rel="icon" href="images/tale.png" type="image/x-icon">
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+        <link rel="icon" href="../images/tale.png" type="image/x-icon">
 
 	</head>
 	<body class="is-preload">
@@ -16,7 +16,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<span class="logo"><img src="images/tale.png" alt="" /></span>
+						<span class="logo"><img src="../images/tale.png" alt="" /></span>
 						<h1>Taley</h1>
 						<p>Creează povestea<br />
 					</header>
@@ -87,7 +87,7 @@
 											<h2>Rățușca cea urâtă</h2>
 										</header>
 									</div>
-									<span class="image"><img src="images/fairy-tale.png" alt="" /></span>
+									<span class="image"><img src="../images/fairy-tale.png" alt="" /></span>
 								</div>
 							</section>
 
@@ -104,13 +104,13 @@
 							
 									<p>
 										<strong>Capitolul 2: Rățușca respinsă</strong>
-										Rățușca cea urâtă era constant respinsă de ceilalți locuitori din zona ei. <span id="time"></span>, pe <span id="weather"></span> Ea căuta să 
+										Rățușca cea urâtă era constant respinsă de ceilalți locuitori din zona ei. <span id="time"> </span>, pe <span id="weather"> </span> ea căuta să
 										găsească prieteni, dar nimeni nu dorea să fie în preajma ei. Se simțea tot mai singură și nefericită.
 									</p>
 							
 									<p>
-										<strong>Capitolul 3: Călătorie în <span id="country"></span></strong>
-										Rățușca cea urâtă decide să plece într-o călătorie prin <span id="region"></span> din <span id="country"></span> pentru a-și găsi un loc în care să fie acceptată. Î
+										<strong>Capitolul 3: Călătorie în <span id="country1"> </span></strong>
+										Rățușca cea urâtă decide să plece într-o călătorie prin <span id="region"></span> din <span id="country2"> </span> pentru a-și găsi un loc în care să fie acceptată. Î
 										n drumul ei, întâlnește animale și oameni care o resping din cauza aspectului ei neobișnuit.
 									</p>
 
@@ -169,13 +169,13 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
 
 			<script>
 				document.addEventListener("DOMContentLoaded", function () {
@@ -224,13 +224,14 @@
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+			console.log(data);
 
             // Update the content of the spans with the retrieved data
-            document.getElementById("country").textContent = data.countryID;
-            document.getElementById("region").textContent = data.regionID;
-            document.getElementById("time").textContent = data.timeOfDayID;
-            document.getElementById("weather").textContent = data.weatherID;
+            document.getElementById("country1").innerText = data.country;
+            document.getElementById("country2").innerText = data.country;
+            document.getElementById("region").innerText = data.region;
+            document.getElementById("time").innerText = data.timeOfTheDay;
+            document.getElementById("weather").innerText = data.weather;
         })
         .catch(error => {
             console.error(error);
